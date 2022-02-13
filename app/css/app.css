@@ -1,0 +1,73 @@
+/* navbar black */
+body {
+  background-image: url("../images/Background.png");
+}
+
+.navbar-black {
+background-color: #000000;
+border: none;
+}
+
+#foot{
+  background-color: #000000;
+  color: #fff;
+}
+
+.navbar-brand>img {
+  height: 100%;
+  width: auto;
+}
+/* change logo text color and hover color */
+.navbar-black .navbar-brand {
+color: #fff
+}
+.navbar-black .navbar-brand:hover, .navbar-black .navbar-brand:focus {
+color:#ccc
+}
+/* Change nav links color */
+.navbar-black .navbar-nav > li > a {
+color:#e7e7e7
+}
+.navbar-black .navbar-nav > li > a:hover {
+color:#fff
+}
+/* change visited color */
+.navbar-black .navbar-nav > li > a:focus {
+color:#fff
+}
+/* form */
+.navbar-black .form-control {
+border-radius:4;
+border:none
+}
+.navbar-black .form-control {
+border:1px solid #000
+}
+.navbar-black .btn {
+border:1px solid #000
+}
+/* open drop down background color */
+.navbar-black .navbar-nav .open .dropdown-menu {
+background:#fff
+}
+/* mobile toggle nav icon */
+.navbar-black .navbar-toggle {
+border-color:#e7e7e7
+}
+.navbar-black .navbar-toggle .icon-bar {
+background-color:#e7e7e7
+}
+.navbar-black .navbar-toggle:focus, .navbar-black .navbar-toggle:hover {
+background-color:#fff
+}
+.navbar-black .navbar-toggle:focus .icon-bar, .navbar-black .navbar-toggle:hover .icon-bar {
+background-color:#3b5998
+}
+
+.contractinfo {
+  background-color: #FFFFFF;
+}
+
+.credentials {
+  background-color: #ecf9ec;
+}

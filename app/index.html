@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>DeSCA - Decentralised Supply Chain Application</title>
+      <meta name = "viewport" content = "width = device-width, initial-scale = 1.0">
+
+      <!-- Bootstrap -->
+      <link href = "css/bootstrap.min.css" rel = "stylesheet">
+      <link href = "css/app.css" rel = "stylesheet">
+
+      <link rel="stylesheet" href="app.css">
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="./app.js"></script>
+
+        <link rel="icon" href="../images/DeSCA_Icon.png">
+   </head>
+
+   <body>
+     <div class="container">
+       <div class="container-fluid">
+      <!-- NAV -->
+       <nav class="navbar navbar-default navbar-black">
+
+       <!-- Brand and toggle get grouped for better mobile display -->
+       <div class="navbar-header">
+       <button type="button" class="navbar-toggle collapsed " data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+       <a class="navbar-brand" href="."><img src="../images/DeSCA_Logo.png" alt="Decentralised Supply Chain Application"></a>
+        </div>
+
+       <!-- Collect the nav links, forms, and other content for toggling -->
+       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+       <ul class="main_menu nav navbar-nav">
+       <li class="active"><a href="#" id="link_admin"><span class="glyphicon glyphicon-user"></span> Administrator</a></li>
+       <li><a href="#" id="link_user"><span class="glyphicon glyphicon-user"></span> User</a></li>
+
+       </ul>
+
+       <ul class="main_menu nav navbar-nav navbar-right">
+       <li><a href="#" id="link_new_account"><span class="glyphicon glyphicon-plus"></span> New Account</a></li>
+       <li><a href="#" id="link_settings"><span class="glyphicon glyphicon-wrench"></span> Settings</a></li>
+       </ul>
+
+       </div>
+
+       </nav>
+
+       <div class="row">
+          <!-- ASIDE -->
+         <aside class="col-xs-12 col-sm-2 col-md-2">
+                        <img src="../images/DeSCA_banner.png" class="img-thumbnail" alt="Decentralised Supply Chain Application"></a>
+           <nav class="menu_administrator navbar navbar-inverse sidebar" role="navigation">
+               <div class="container-fluid">
+           		<!-- Brand and toggle get grouped for better mobile display -->
+           		<div class="navbar-header">
+           			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-sidebar-navbar-collapse-1">
+           				<span class="sr-only">Toggle navigation</span>
+           				<span class="icon-bar"></span>
+           				<span class="icon-bar"></span>
+           				<span class="icon-bar"></span>
+           			</button>
+           		</div>
+           		<!-- Collect the nav links, forms, and other content for toggling -->
+           		<div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
+           			<ul class="nav navbar-nav navadmin">
+           				<li class="active"><a href="#" id="link_manage_user"><span class="hidden-xs glyphicon glyphicon-cog" ></span> Manage Users</a></li>
+           				<li><a href="#" id="link_supply_chain_admin"><span class="hidden-xs glyphicon glyphicon-link"></span> Show Provenance</a></li>
+           			</ul>
+           		</div>
+           	</div>
+           </nav>
+
+           <nav class="menu_user navbar navbar-inverse sidebar" role="navigation">
+               <div class="container-fluid">
+               <!-- Brand and toggle get grouped for better mobile display -->
+               <div class="navbar-header">
+                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-sidebar-navbar-collapse-1">
+                   <span class="sr-only">Toggle navigation</span>
+                   <span class="icon-bar"></span>
+                   <span class="icon-bar"></span>
+                   <span class="icon-bar"></span>
+                 </button>
+               </div>
+               <!-- Collect the nav links, forms, and other content for toggling -->
+               <div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
+                 <ul class="nav navbar-nav">
+                   <li class="active"><a href="#" id="link_new_item"><span class="hidden-xs glyphicon glyphicon-tag"></span> New Item</a></li>
+                   <li><a href="#" id="link_transfer_item"><span class="hidden-xs glyphicon glyphicon-share-alt"></span> Transfer Item</a></li>
+                   <li><a href="#" id="link_supply_chain_user"><span class="hidden-xs glyphicon glyphicon-link"></span> Show Provenance</a></li>
+                 </ul>
+               </div>
+             </div>
+           </nav>
+
+
+         </aside>
+          <!-- ARTICLE -->
+
+
+         <article class="col-xs-12 col-sm-10 col-md-10">
+
+           <div class="panel_settings">
+
+
+
+
+
+                      <form class="well form-horizontal" id="contact_form">
+                        <fieldset>
+                        <legend>General Settings</legend>
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">New Smart Contract</label>
+                          <div class="col-md-4">
+                            <button type="button" class="btn btn-danger" id="button_deploy_contract">Deploy <span class="glyphicon glyphicon-log-in"></span></button>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="col-md-4 control-label">Supply Chain Contract Address</label>
+                          <div class="col-md-7 inputGroupContainer">
+                          <div class="input-group">
+                          <span class="input-group-addon"><i class="glyphicon glyphicon-duplicate"></i></span>
+                          <input id="contract_address_connect" placeholder="" class="form-control"  type="text">
+                          <button type="button" id="button_connect_contract" class="btn btn-warning" >Connect <span class="glyphicon glyphicon-resize-small"></span></button>
+                          </div>
+
+                          <div class="col-md-4">
+
+                          </div>
+                          </div>
+
+                        </div>
+                      </fieldset>
+                      </form>
+
+                      <!-- Success message -->
+                      <div class="alert alert-success" id="success_deploy_contract">Success <i class="glyphicon glyphicon-thumbs-up"></i> You deployed a new contract succesfully.</div>
+
+                      <!-- Fail message -->
+                      <div class="alert alert-danger" id="fail_deploy_contract">Failed <i class="glyphicon glyphicon-thumbs-up"></i> You did not deployed a new contract succesfully.</div>
+
+                      <!-- Success message -->
+                      <div class="alert alert-success" id="success_connect_contract">Success <i class="glyphicon glyphicon-thumbs-up"></i> You connected to the contract succesfully.</div>
+
+                      <!-- Fail message -->
+                      <div class="alert alert-danger" id="fail_connect_contract">Failed <i class="glyphicon glyphicon-thumbs-up"></i> You did connected to the contract succesfully.</div>
+           </div>
+
+
+<div class="panel_info">
+           <form class="contractinfo well form-horizontal" id="contact_form">
+             <fieldset>
+             <legend>Contract Information</legend>
+             <div class="form-group">
+               <label class="col-md-4 control-label">Contract Address</label>
+               <div class="col-md-7 inputGroupContainer">
+               <div class="input-group">
+               <span class="input-group-addon"><i class="glyphicon glyphicon-duplicate"></i></span>
+               <input id="contract_address" placeholder="WARNING! You are not connected to any contract!" class="form-control"  type="text">
+                 </div>
+               </div>
+             </div>
+           </fieldset>
+           </form>
+</div>
+
+<div class="panel_credentials">
+           <form class="credentials well form-horizontal" id="contact_form">
+             <fieldset>
+             <legend>Credentials</legend>
+
+             <!-- Select Basic -->
+
+             <div class="form-group">
+               <label class="col-md-4 control-label">Account</label>
+                 <div class="col-md-7 selectContainer">
+                 <div class="input-group">
+                     <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+                 <select id="account_list" class="form-control selectpicker" >
+                   <option value=" " >Please select your account</option>
+                 </select>
+               </div>
+             </div>
+             </div>
+
+             <div class="form-group">
+               <label class="col-md-4 control-label">Password</label>
+               <div class="col-md-7 inputGroupContainer">
+               <div class="input-group">
+               <span class="input-group-addon"><i class="glyphicon glyphicon-ruble"></i></span>
+               <input id="password_user" placeholder="WARNING! You did not insert a password!" class="form-control" type="password">
+                 </div>
+               </div>
+             </div>
+           </fieldset>
+           </form>
+</div>
+
+
+          <!---------------------------------------------------------------->
+       <!--Administrator: Create new account----------------------------->
+       <!---------------------------------------------------------------->
+<div class="panel_new_account">
+
+     <form class="well form-horizontal" id="contact_form">
+ <fieldset>
+
+ <!-- Form Name -->
+ <legend>New Account</legend>
+
+ <!-- Text input-->
+
+ <div class="form-group">
+   <label class="col-md-4 control-label">Password</label>
+   <div class="col-md-6 inputGroupContainer">
+   <div class="input-group">
+   <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+   <input id="new_password" placeholder="Choose a password" class="form-control" type="password">
+     </div>
+   </div>
+ </div>
+
+ <div class="alert alert-danger" role="alert">
+   This will create a new account on the Geth client. The account is handled by Geth, not by this ÐApp. Be careful remembering your personal password.
+ </div>
+
+
+ <!-- Success message -->
+ <div class="alert alert-success" id="success_new_account">Success <i class="glyphicon glyphicon-thumbs-up"></i> New account created succesfully.</div>
+
+ <!-- Fail message -->
+ <div class="alert alert-danger" id="fail_new_account">Failed <i class="glyphicon glyphicon-thumbs-up"></i> New account NOT created succesfully.</div>
+
+ <!-- Button -->
+ <div class="form-group">
+   <label class="col-md-4 control-label"></label>
+   <div class="col-md-4">
+     <button type="button" id="button_create_account" class="btn btn-warning" >Create <span class="glyphicon glyphicon-plus"></span></button>
+   </div>
+ </div>
+
+ </fieldset>
+ </form>
+
+ <form class="well form-horizontal" id="contact_form">
+       <fieldset>
+       <!-- Form Name -->
+       <legend>Existing Accounts</legend>
+
+         <table class="table table-nonfluid table-striped table-hover table-bordered table-condensed" id="table_accounts">
+           <thead>
+             <tr>
+               <th>#</th>
+               <th>Accounts</th>
+             </tr>
+           </thead>
+           <tbody>
+           </tbody>
+         </table>
+
+     </fieldset>
+   </form>
+ </div>
+
+
+         <!---------------------------------------------------------------->
+         <!--Administrator: Manage Users----------------------------------->
+         <!---------------------------------------------------------------->
+         <div class="panel_manage_users_administrator">
+
+              <form class="well form-horizontal">
+          <fieldset>
+
+          <!-- Form Name -->
+          <legend>Manage Users</legend>
+
+          <!-- Text input-->
+
+          <div class="form-group">
+            <label class="col-md-4 control-label">Public key</label>
+            <div class="col-md-7 inputGroupContainer">
+            <div class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-tag"></i></span>
+            <input type="text" class="form-control" id="public_key_user" placeholder="Public key">
+              </div>
+            </div>
+          </div>
+
+          <!-- Text input-->
+          <div class="form-group">
+            <label class="col-md-4 control-label">Name</label>
+            <div class="col-md-6 inputGroupContainer">
+            <div class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+            <input type="text" class="form-control" id="name_user" placeholder="First Name">
+              </div>
+            </div>
+          </div>
+
+          <!-- Text input-->
+
+          <div class="form-group">
+            <label class="col-md-4 control-label">Job Title</label>
+              <div class="col-md-6 inputGroupContainer">
+              <div class="input-group">
+                  <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                  <input type="text" class="form-control" id="job_title_user" placeholder="Job Title">
+              </div>
+            </div>
+          </div>
+
+          <!-- Text input-->
+
+          <div class="form-group">
+            <label class="col-md-4 control-label">Company</label>
+              <div class="col-md-6 inputGroupContainer">
+              <div class="input-group">
+                  <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                  <input type="text" class="form-control" id="company_user" placeholder="Company">
+              </div>
+            </div>
+          </div>
+
+          <!-- Select Basic -->
+
+          <div class="form-group">
+            <label class="col-md-4 control-label">Role</label>
+              <div class="col-md-6 selectContainer">
+              <div class="input-group">
+                  <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+              <select id="role_user" class="form-control selectpicker">
+                <option value=" " >Please select the role</option>
+                <option>Producer</option>
+                <option>Distributor</option>
+                <option>Retailer</option>
+                  <option >Customer</option>
+              </select>
+            </div>
+          </div>
+          </div>
+
+          <!-- Text area -->
+
+          <div class="form-group">
+            <label class="col-md-4 control-label">RDF Data</label>
+              <div class="col-md-7 inputGroupContainer">
+              <div class="input-group">
+                  <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                    <button type="button" class="btn btn-warning" id="button_generate_rdf_user" >Generate RDF <span class="glyphicon glyphicon-export"></span></button>
+                  	<textarea class="form-control" rows="5" id="rdf_data_user" placeholder="RDF Data"></textarea>
+            </div>
+            </div>
+          </div>
+
+          <!-- Select Basic -->
+
+          <div class="form-group">
+            <label class="col-md-4 control-label">Location of RDF data</label>
+              <div class="col-md-6 selectContainer">
+              <div class="input-group">
+                  <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+              <select id="location_rdf_user" class="form-control selectpicker">
+                <option value=" " >Choose Location</option>
+                <option>Contract storage</option>
+                <option>IPFS</option>
+              </select>
+            </div>
+          </div>
+          </div>
+
+          <!-- Text input-->
+          <div id="ipfs_user">
+          <div class="form-group">
+            <label class="col-md-4 control-label">IPFS Address</label>
+              <div class="col-md-7 inputGroupContainer">
+              <div class="input-group">
+                  <span class="input-group-addon"><i class="glyphicon glyphicon-stop"></i></span>
+                  <button type="button" class="btn btn-warning" id="button_ipfs_user" >Upload IPFS <span class="glyphicon glyphicon-export"></span></button>
+                  <input type="text" class="form-control" id="ipfs_address_user" placeholder="IPFS Address">
+              </div>
+            </div>
+          </div>
+        </div>
+
+          <!-- Success message -->
+          <div class="alert alert-success" id="success_manage_users">Success <i class="glyphicon glyphicon-thumbs-up"></i> You registered the user succesfully.</div>
+
+          <!-- Fail message -->
+          <div class="alert alert-danger" id="fail_manage_users">Failed <i class="glyphicon glyphicon-thumbs-up"></i> You did not registered the user succesfully.</div>
+
+
+          <!-- Button -->
+          <div class="form-group">
+            <label class="col-md-4 control-label"></label>
+            <div class="col-md-6">
+              <button type="button" class="btn btn-success" id="button_register_user" >Register User <span class="glyphicon glyphicon-saved"></span></button>
+            </div>
+          </div>
+
+          </fieldset>
+          </form>
+
+
+          <form class="well form-horizontal" id="contact_form">
+          <fieldset>
+
+          <!-- Form Name -->
+          <legend>Registered Users</legend>
+
+
+         <table class="table table-striped table-hover table-bordered table-condensed" id="table_users">
+           <thead>
+             <tr>
+               <th>#</th>
+               <th>Address</th>
+               <th>Name</th>
+               <th>Role</th>
+             </tr>
+           </thead>
+           <tbody>
+           </tbody>
+         </table>
+
+      </fieldset>
+    </form>
+
+
+
+
+          </div>
+
+
+         <!---------------------------------------------------------------->
+         <!--User: New Item------------------------------------------------>
+         <!---------------------------------------------------------------->
+         <div class="panel_new_item_user">
+
+           <form class="well form-horizontal" id="contact_form">
+
+          <fieldset>
+
+          <!-- Form Name -->
+          <legend>New Item</legend>
+
+          <!-- Text input-->
+          <div class="form-group">
+            <label class="col-md-4 control-label">Item Name</label>
+            <div class="col-md-6 inputGroupContainer">
+            <div class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-text-width"></i></span>
+            <input id="name_item" placeholder="Item Name" class="form-control" type="text">
+              </div>
+            </div>
+          </div>
+
+
+          <div class="form-group">
+            <label class="col-md-4 control-label">Code</label>
+            <div class="col-md-6 inputGroupContainer">
+            <div class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
+            <input id="code_item" placeholder="Code/Serial Number" class="form-control" type="text">
+              </div>
+            </div>
+          </div>
+
+          <!-- Text input
+          <div class="form-group">
+            <label class="col-md-4 control-label">Decimals</label>
+            <div class="col-md-2 inputGroupContainer">
+            <div class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-sort-by-order"></i></span>
+            <input id="decimals_item" placeholder="Decimals" class="form-control" type="text">
+              </div>
+            </div>
+          </div>-->
+
+          <!-- Text input-->
+          <div class="form-group">
+            <label class="col-md-4 control-label">Total Supply</label>
+            <div class="col-md-3 inputGroupContainer">
+            <div class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-list-alt"></i></span>
+            <input id="total_supply_item" placeholder="Total Supply" class="form-control" type="text">
+              </div>
+            </div>
+          </div>
+
+          <!-- Text area -->
+
+          <div class="form-group">
+            <label class="col-md-4 control-label">Description</label>
+              <div class="col-md-6 inputGroupContainer">
+              <div class="input-group">
+                  <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                    <textarea id="description_item" class="form-control" name="comment" placeholder="Description"></textarea>
+            </div>
+            </div>
+          </div>
+
+
+
+                    <!-- Text area -->
+
+                    <div class="form-group">
+                      <label class="col-md-4 control-label">RDF Data</label>
+                        <div class="col-md-7 inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                            <button type="button" class="btn btn-warning" id="button_generate_rdf_item" >Generate RDF <span class="glyphicon glyphicon-export"></span></button>
+                              <textarea id="rdf_data_item" class="form-control" rows="5" name="comment" placeholder="RDF Data"></textarea>
+                      </div>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="col-md-4 control-label">Type</label> <button type="button" id="button_update_items" class="btn btn-info" ><span class="glyphicon glyphicon-refresh"></span></button>
+                        <div class="col-md-6 selectContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+                        <select id="type_item" class="form-control selectpicker">
+                          <option value=" " >Choose Type</option>
+                          <option>Normal</option>
+                          <option>Merge</option>
+                          <option>Divide</option>
+                        </select>
+                      </div>
+                    </div>
+                    </div>
+
+                    <div id="merge_item">
+                      <div class="form-group">
+                        <label class="col-md-4 control-label">First item to merge</label>
+                          <div class="col-md-6 selectContainer">
+                          <div class="input-group">
+                              <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+                          <select id="merge_item1" class="form-control selectpicker">
+                            <option value=" " >Choose Item</option>
+                          </select>
+                        </div>
+                      </div>
+                      </div>
+
+                      <div class="form-group">
+                        <label class="col-md-4 control-label">Quantity</label>
+                        <div class="col-md-3 inputGroupContainer">
+                        <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-list-alt"></i></span>
+                        <input id="quantity1_merge_item" placeholder="Quantity" class="form-control" type="text">
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <label class="col-md-4 control-label">Second item to merge</label>
+                          <div class="col-md-6 selectContainer">
+                          <div class="input-group">
+                              <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+                          <select id="merge_item2" class="form-control selectpicker">
+                            <option value=" " >Choose Item</option>
+                          </select>
+                        </div>
+                      </div>
+                      </div>
+
+                      <div class="form-group">
+                        <label class="col-md-4 control-label">Quantity</label>
+                        <div class="col-md-3 inputGroupContainer">
+                        <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-list-alt"></i></span>
+                        <input id="quantity2_merge_item" placeholder="Quantity" class="form-control" type="text">
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+                                        <div id="split_item">
+                                          <div class="form-group">
+                                            <label class="col-md-4 control-label">Item to divide</label>
+                                              <div class="col-md-6 selectContainer">
+                                              <div class="input-group">
+                                                  <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+                                              <select id="divide_item" class="form-control selectpicker">
+                                                <option value=" " >Choose Item</option>
+                                              </select>
+                                            </div>
+                                          </div>
+                                          </div>
+
+                                          <div class="form-group">
+                                            <label class="col-md-4 control-label">Quantity</label>
+                                            <div class="col-md-3 inputGroupContainer">
+                                            <div class="input-group">
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-list-alt"></i></span>
+                                            <input id="quantity_divide_item" placeholder="Total Supply" class="form-control" type="text">
+                                              </div>
+                                            </div>
+                                          </div>
+
+                    </div>
+
+                    <div class="form-group">
+                      <label class="col-md-4 control-label">Location of RDF data</label>
+                        <div class="col-md-6 selectContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+                        <select id="location_rdf_item" class="form-control selectpicker">
+                          <option value=" " >Choose Location</option>
+                          <option>Contract storage</option>
+                          <option>IPFS</option>
+                        </select>
+                      </div>
+                    </div>
+                    </div>
+
+                    <!-- Text input-->
+                    <div id="ipfs_item">
+                    <div class="form-group">
+                      <label class="col-md-4 control-label">IPFS Address</label>
+                        <div class="col-md-6 inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-stop"></i></span>
+                            <button type="button" class="btn btn-warning" id="button_ipfs_item" >Upload IPFS <span class="glyphicon glyphicon-export"></span></button>
+                            <input type="text" class="form-control" id="ipfs_address_item" placeholder="IPFS Address">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+          <!-- Success message -->
+          <div class="alert alert-success" id="success_new_item">Success <i class="glyphicon glyphicon-thumbs-up"></i> You registered the item succesfully.</div>
+
+          <!-- Fail message -->
+          <div class="alert alert-danger" id="fail_new_item">Failed <i class="glyphicon glyphicon-thumbs-up"></i> You did not registered the item succesfully.</div>
+
+          <!-- Button -->
+          <div class="form-group">
+            <label class="col-md-4 control-label"></label>
+            <div class="col-md-4">
+              <button type="button" class="btn btn-success" id="button_register_item">Register Item <span class="glyphicon glyphicon-plus"></span></button>
+            </div>
+          </div>
+
+          </fieldset>
+          </form>
+
+          <form class="well form-horizontal" id="contact_form">
+                  <fieldset>
+
+                  <!-- Form Name -->
+                  <legend>Items</legend>
+
+
+                 <table class="table table-striped table-hover table-bordered table-condensed" id="table_items">
+                    <thead>
+                      <tr>
+                        <th>#</th>
+                        <th>Item Name</th>
+                        <th>Supply</th>
+                        <th>Orginal Owner</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                  </table>
+
+              </fieldset>
+            </form>
+
+
+
+          </div>
+
+
+         <!---------------------------------------------------------------->
+         <!--User: Transfer Item------------------------------------------->
+         <!---------------------------------------------------------------->
+         <div class="panel_transfer_item_user">
+
+              <form class="well form-horizontal" id="contact_form">
+          <fieldset>
+
+          <!-- Form Name -->
+          <legend>Transfer Item</legend>
+
+          <!-- Text input-->
+          <div class="form-group">
+            <label class="col-md-4 control-label">To</label>
+             <div class="col-md-7 inputGroupContainer">
+              <div class="input-group">
+                  <span class="input-group-addon"><i class="glyphicon glyphicon-globe"></i></span>
+            <input id="to" placeholder="Address" class="form-control" type="text">
+              </div>
+            </div>
+          </div>
+
+          <!-- Select Basic -->
+          <div class="form-group">
+            <label class="col-md-4 control-label">Item</label> <button type="button" id="button_update_transfer" class="btn btn-info" ><span class="glyphicon glyphicon-refresh"></span></button>
+              <div class="col-md-6 selectContainer">
+              <div class="input-group">
+                  <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+              <select id="_item" class="form-control selectpicker" >
+                <option value=" ">Select the Item</option>
+              </select>
+            </div>
+          </div>
+          </div>
+
+          <!-- Text input-->
+
+          <div class="form-group">
+            <label class="col-md-4 control-label">Quantity</label>
+              <div class="col-md-3 inputGroupContainer">
+              <div class="input-group">
+                  <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+            <input id="quantity_item" placeholder="Quantity" class="form-control"  type="text">
+              </div>
+          </div>
+          </div>
+
+
+
+          <!-- Success message -->
+          <div class="alert alert-success" id="success_transfer_item">Success <i class="glyphicon glyphicon-thumbs-up"></i> You transfered the item succesfully.</div>
+
+          <!-- Fail message -->
+          <div class="alert alert-danger" id="fail_transfer_item">Failed <i class="glyphicon glyphicon-thumbs-up"></i> You did not transfered the item succesfully.</div>
+          <!-- Button -->
+          <div class="form-group">
+            <label class="col-md-4 control-label"></label>
+            <div class="col-md-6">
+              <button type="button" class="btn btn-success" id="button_transfer_item">Transfer <span class="glyphicon glyphicon-transfer"></span></button>
+            </div>
+          </div>
+
+          </fieldset>
+          </form>
+
+
+          <form class="well form-horizontal" id="contact_form">
+          <fieldset>
+
+          <!-- Form Name -->
+          <legend>Transactions</legend>
+
+
+           <table class="table table-striped table-hover table-bordered table-condensed" id="table_transactions">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>From</th>
+                <th>To</th>
+                <th>Item</th>
+                <th>Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+
+      </fieldset>
+    </form>
+
+
+
+         </div>
+
+         <!---------------------------------------------------------------->
+         <!--Administrator&User: Supply Chain------------------------------>
+         <!---------------------------------------------------------------->
+         <div class="panel_supply_chain">
+
+              <form class="well form-horizontal" id="contact_form">
+          <fieldset>
+
+          <!-- Form Name -->
+          <legend>Provenance</legend>
+
+
+          <!-- Select Basic -->
+
+          <div class="form-group">
+            <label class="col-md-4 control-label">Item</label> <button type="button" id="button_update_provenance" class="btn btn-info" ><span class="glyphicon glyphicon-refresh"></span></button>
+              <div class="col-md-4 selectContainer">
+              <div class="input-group">
+                  <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+              <select id="item_provenance" name="state" class="form-control selectpicker" >
+                <option value=" ">Please select your item</option>
+              </select>
+            </div>
+          </div>
+          </div>
+
+
+          <!-- Button -->
+          <div class="form-group">
+            <label class="col-md-4 control-label"></label>
+            <div class="col-md-4">
+              <button id="button_show_provenance" type="button" class="btn btn-success" >Show <span class="glyphicon glyphicon-plane"></span></button>
+            </div>
+          </div>
+
+          </fieldset>
+          </form>
+
+          <div class="well form-horizontal">
+            <div class="panel_provenance" id="pan_prov">
+
+            </div>
+          </div>
+
+
+
+          </div>
+
+
+
+
+
+
+</article>
+       </div>
+       <footer>
+         <div class="footer navbar-fixed-bottom" id="foot">
+         <center> 2016. Made by Héctor Eduardo Ugarte Rojas - University of Bonn </center>
+       </div>
+       </footer>
+       </div>
+     </div>
+      <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+      <script src = "https://code.jquery.com/jquery.js"></script>
+      <!-- Include all compiled plugins (below), or include individual files as needed -->
+      <script src = "js/bootstrap.min.js"></script>
+
+      <script src="js/lightwallet.min.js"></script>
+   </body>
+</html>
